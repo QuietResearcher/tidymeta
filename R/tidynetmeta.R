@@ -15,7 +15,7 @@ library (netmeta)
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
-simpleNMA <- function(data, n=NULL, r=NULL, measure = "OR", correction = FALSE, random = TRUE, ref = "Untreated", sm.val = "good") {
+simpleNMA.bin <- function(data, n=NULL, r=NULL, measure = "OR", correction = FALSE, random = TRUE, ref = "Untreated", sm.val = "good") {
 
   if (!is.null(n) && !is.null(r)) {
     transformed_data <- pairwise(treat = treatment, event = data$r, studlab = study, n = data$n, data = data, sm = measure, allstudies = correction)
