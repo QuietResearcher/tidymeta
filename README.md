@@ -9,7 +9,7 @@ install.packages("devtools")
 Then, install the package using the following code in your R console:
 ```
 library(devtools)
-install_github("Displayr/flipPlots")
+install_github("QuietResearcher/tidymeta")
 ```
 
 # Functions & Parameters
