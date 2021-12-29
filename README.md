@@ -52,7 +52,7 @@ NMAobj: The netmeta object. (required)
 
 refname: String name of the reference group (for label purposes only). (required)
 
-xlim: Optional x limit. Default is 0.01 to 100. Enter NULL for netmeta default.
+xlim: Optional x limit.
 
 
 
@@ -64,3 +64,19 @@ Parameters:
 NMAobj: The netmeta object. (required)
 
 rank: Vector containing the ranking of the treatment arms. (required)
+
+
+
+
+## subgroupNMA.bin: Generates a a quick subgroup analysis.
+```
+subgroupNMA.bin (NMAobj, data, byvar, specvar = NULL, refname = "Untreated (SOC/Placebo)", xlim = NULL)
+```
+Parameters:
+NMAobj: The netmeta object. (required)
+
+data: The original long dataframe. (required)
+
+byvar: The variable name/variable column name, same as netmeta. (required)
+
+refname and xlim can be passed to the NMAsummary function if needed (optional).
