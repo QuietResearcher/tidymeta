@@ -2,8 +2,8 @@ Package: tidymeta
 Type: Package
 Title: TidyMeta
 Version: 69.420
-Author: Jiawen Deng, HUKSG Consulting Researcher
-Maintainer: Jiawen Deng, HUKSG Consulting Researcher
+Author: Jiawen Deng <HUKSG Consulting Researcher>
+Maintainer: Jiawen Deng <HUKSG Consulting Researcher>
 Description: A basic wrapper to simplify functions from the meta and netmeta packages. Designed for HUKSG use only.
 Depends:
     netmeta
