@@ -38,7 +38,7 @@ simpleNMA.bin <- function(data, n=NULL, r=NULL, measure = "OR", correction = FAL
 
 }
 
-NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = c(0.01, 100)) {
+NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL) {
 
   if (NMAobj$comb.random = TRUE) modelname <- "(Random Effects Model)"
   else modelname <- "(Fixed Effects Model)"
@@ -83,4 +83,22 @@ CAfunnel <- function(NMAobj, rank) {
   # Generate funnel plot (parameter col= is a really disgusting workaround to get the number of total comparisons)
   funnel <- funnel.netmeta(NMAobj, order = f, legend = FALSE, pch = c(16), col = c(1:NROW(result.bin$Q.decomp$treat1)), linreg = TRUE, rank = FALSE, mm = FALSE)
 
+}
+
+subgroupNMA.bin <- function(NMAobj, data, byvar, specvar = NULL, refname = "Untreated (SOC/Placebo)", xlim = NULL) {
+
+  if (!is.null(specvar)) tempvar = specvar
+  else tempvar = data$byvar
+
+  x<-split(data, data$byvar)
+
+  for (v in tempvar) {
+
+    tempdata <- x$v
+    tempNMAobj <- simpleNMA.bin (data = tempdata, measure = NMAobj$sm, correction = NMAobj[["data"]][["allstudies"]][1], random = NMAobj$comb.random,
+                                 ref = NMAobj[["reference.group"]], sm.val = NMAobj[["small.values"]])
+
+    NMAsummary (tempNMAobj, refname = refname, xlim = xlim)
+
+  }
 }
