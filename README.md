@@ -13,7 +13,7 @@ install_github("QuietResearcher/tidymeta")
 ```
 
 # Functions & Parameters
-##**simpleNMA.bin: Generates a netmeta NMA object for dichotomous outcomes.**
+## simpleNMA.bin: Generates a netmeta NMA object for dichotomous outcomes.**
 ```
 simpleNMA.bin (data, n, r, measure, correction, random, ref, sm.val)
 ```
@@ -43,7 +43,7 @@ results.bin <- simpleNMA.bin (data = data, measure = "OR", correction = TRUE, re
 
 
 
-##**NMAsummary: Generates a console print out of the network results, a standardized forest plot and a network plot.**
+## NMAsummary: Generates a console print out of the network results, a standardized forest plot and a network plot.**
 ```
 NMAsummary (NMAobj, refname, xlim)
 ```
