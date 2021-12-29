@@ -46,6 +46,7 @@ NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL)
 
   netgraph(NMAobj, cex = 0.9, multiarm=TRUE, start.layout = "circle", offset = 0.035)
 
+  if (!is.null(xlim)){
   forest(NMAobj,
          fontsize=10,
          leftcols = c("studlab", "Pscore", "effect", "ci"),
@@ -62,6 +63,24 @@ NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL)
          colgap.forest = "0.5cm",
          smlab = paste ("Intervention vs", refname,"\n",modelname),
          layout="JAMA")
+  } else {
+    forest(NMAobj,
+           fontsize=10,
+           leftcols = c("studlab", "Pscore", "effect", "ci"),
+           leftlabs = c("Treatment Arms"),
+           sortvar = -Pscore,
+           plotwidth = "8cm",
+           spacing = 1.25,
+           just = "center",
+           col.square.lines = "black",
+           col.square = "grey",
+           col.inside = "black",
+           lwd = 1,
+           colgap.forest = "0.5cm",
+           smlab = paste ("Intervention vs", refname,"\n",modelname),
+           layout="JAMA")
+  }
+
 
   print (ref = NMAobj$reference.group, NMAobj)
 
@@ -88,14 +107,14 @@ CAfunnel <- function(NMAobj, rank) {
 
 subgroupNMA.bin <- function(NMAobj, data, byvar, specvar = NULL, refname = "Untreated (SOC/Placebo)", xlim = NULL) {
 
-  if (!is.null(specvar)) tempvar = specvar
-  else tempvar = data$byvar
+  if (!is.null(specvar)) {tempvar = specvar} else tempvar = data$byvar
 
-  x<-split(data, data$byvar)
+  x<-split(data, data[byvar])
 
   for (v in tempvar) {
 
-    tempdata <- x$v
+    tempdata <- x[v]
+    tempdata <- tempdata[[v]]
     tempNMAobj <- simpleNMA.bin (data = tempdata, measure = NMAobj$sm, correction = NMAobj[["data"]][["allstudies"]][1], random = NMAobj$comb.random,
                                  ref = NMAobj[["reference.group"]], sm.val = NMAobj[["small.values"]])
 
