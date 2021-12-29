@@ -40,7 +40,7 @@ simpleNMA.bin <- function(data, n=NULL, r=NULL, measure = "OR", correction = FAL
 
 NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL) {
 
-  if (NMAobj$comb.random = TRUE) modelname <- "(Random Effects Model)"
+  if (NMAobj$comb.random == TRUE) modelname <- "(Random Effects Model)"
   else modelname <- "(Fixed Effects Model)"
 
   netgraph(NMAobj, cex = 0.9, multiarm=TRUE, start.layout = "circle", offset = 0.035)
