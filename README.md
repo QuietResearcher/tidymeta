@@ -13,7 +13,7 @@ install_github("QuietResearcher/tidymeta")
 ```
 
 # Functions & Parameters
-**simpleNMA.bin: Generates a netmeta NMA object for dichotomous outcomes.**
+## simpleNMA.bin: Generates a netmeta NMA object for dichotomous outcomes.
 ```
 simpleNMA.bin (data, n, r, measure, correction, random, ref, sm.val)
 ```
@@ -42,3 +42,25 @@ results.bin <- simpleNMA.bin (data = data, measure = "OR", correction = TRUE, re
 ```
 
 
+
+## NMAsummary: Generates a console print out of the network results, a standardized forest plot and a network plot.
+```
+NMAsummary (NMAobj, refname, xlim)
+```
+Parameters:
+NMAobj: The netmeta object. (required)
+
+refname: String name of the reference group (for label purposes only). (required)
+
+xlim: Optional x limit. Default is 0.01 to 100. Enter NULL for netmeta default.
+
+
+
+## CAfunnel: Generates a comparison-adjusted funnel plot.
+```
+CAfunnel (NMAobj, rank)
+```
+Parameters:
+NMAobj: The netmeta object. (required)
+
+rank: Vector containing the ranking of the treatment arms. (required)
