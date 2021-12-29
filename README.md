@@ -56,3 +56,11 @@ xlim: Optional x limit. Default is 0.01 to 100. Enter NULL for netmeta default.
 
 
 
+## CAfunnel: Generates a comparison-adjusted funnel plot.
+```
+CAfunnel (NMAobj, rank)
+```
+Parameters:
+NMAobj: The netmeta object. (required)
+
+rank: Vector containing the ranking of the treatment arms. (required)
