@@ -60,7 +60,7 @@ NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL)
          col.inside = "black",
          lwd = 1,
          colgap.forest = "0.5cm",
-         smlab = paste ("Intervention vs ", refname,"\n",modelname),
+         smlab = paste ("Intervention vs", refname,"\n",modelname),
          layout="JAMA")
 
   print (ref = NMAobj$reference.group, NMAobj)
@@ -69,9 +69,9 @@ NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL)
 
 CAfunnel <- function(NMAobj, rank) {
 
-  rank <- netrank(NMAobj)
+  j_rank <- netrank(NMAobj)
 
-  treatment_names <- rank$Pscore.random
+  treatment_names <- j_rank$Pscore.random
   treatment_names <- data.frame(trt = names(treatment_names), score = unname(treatment_names))
   f <- c(treatment_names$trt)
 
