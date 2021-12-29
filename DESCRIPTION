@@ -6,7 +6,6 @@ Author: Jiawen Deng, HUKSG Consulting Researcher
 Maintainer: Jiawen Deng, HUKSG Consulting Researcher
 Description: A basic wrapper to simplify functions from the meta and netmeta packages. Designed for HUKSG use only.
 Depends:
-    R
     netmeta
 License: MIT
 Encoding: UTF-8
