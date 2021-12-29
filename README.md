@@ -49,7 +49,9 @@ NMAsummary (NMAobj, refname, xlim)
 ```
 Parameters:
 NMAobj: The netmeta object. (required)
+
 refname: String name of the reference group (for label purposes only). (required)
+
 xlim: Optional x limit. Default is 0.01 to 100. Enter NULL for netmeta default.
 
 
