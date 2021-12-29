@@ -60,7 +60,7 @@ NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL)
          col.inside = "black",
          lwd = 1,
          colgap.forest = "0.5cm",
-         smlab = paste(refname,"\n",modelname),
+         smlab = paste ("Intervention vs ", refname,"\n",modelname),
          layout="JAMA")
 
   print (ref = NMAobj$reference.group, NMAobj)
