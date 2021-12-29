@@ -39,10 +39,10 @@ simpleNMA.bin <- function(data, n=NULL, r=NULL, measure = "OR", correction = FAL
 
 }
 
-NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL) {
+NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL, HiddenParameter = NULL) {
 
-  if (NMAobj$comb.random == TRUE) modelname <- "(Random Effects Model)"
-  else modelname <- "(Fixed Effects Model)"
+  if (NMAobj$comb.random == TRUE) modelname <- "Random Effects Model"
+  else modelname <- "Fixed Effects Model"
 
   netgraph(NMAobj, cex = 0.9, multiarm=TRUE, start.layout = "circle", offset = 0.035)
 
@@ -61,7 +61,7 @@ NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL)
          col.inside = "black",
          lwd = 1,
          colgap.forest = "0.5cm",
-         smlab = paste ("Intervention vs", refname,"\n",modelname),
+         smlab = paste ("Intervention vs", refname,HiddenParameter,"\n",modelname),
          layout="JAMA")
   } else {
     forest(NMAobj,
@@ -118,7 +118,7 @@ subgroupNMA.bin <- function(NMAobj, data, byvar, specvar = NULL, refname = "Untr
     tempNMAobj <- simpleNMA.bin (data = tempdata, measure = NMAobj$sm, correction = NMAobj[["data"]][["allstudies"]][1], random = NMAobj$comb.random,
                                  ref = NMAobj[["reference.group"]], sm.val = NMAobj[["small.values"]])
 
-    NMAsummary (tempNMAobj, refname = refname, xlim = xlim)
+    NMAsummary (tempNMAobj, refname = refname, xlim = xlim, HiddenParameter = paste("(",v," Subgroup)", sep=""))
 
   }
 }
