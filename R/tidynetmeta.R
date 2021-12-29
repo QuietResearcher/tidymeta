@@ -38,9 +38,49 @@ simpleNMA.bin <- function(data, n=NULL, r=NULL, measure = "OR", correction = FAL
 
 }
 
-NMAsummary <- function(NMAobj) {
+NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = c(0.01, 100)) {
 
-  forest(result.bin, leftcols = c("studlab", "Pscore"),xlim=c(0.01,100), sortvar = -Pscore, plotwidth="10cm", layout = "JAMA")
+  if (NMAobj$comb.random = TRUE) modelname <- "(Random Effects Model)"
+  else modelname <- "(Fixed Effects Model)"
+
+  netgraph(NMAobj, cex = 0.9, multiarm=TRUE, start.layout = "circle", offset = 0.035)
+
+  forest(NMAobj,
+         fontsize=10,
+         leftcols = c("studlab", "Pscore", "effect", "ci"),
+         leftlabs = c("Treatment Arms"),
+         xlim=xlim,
+         sortvar = -Pscore,
+         plotwidth = "8cm",
+         spacing = 1.25,
+         just = "center",
+         col.square.lines = "black",
+         col.square = "grey",
+         col.inside = "black",
+         lwd = 1,
+         colgap.forest = "0.5cm",
+         smlab = refname + "\n" + modelname,
+         layout="JAMA")
+
   print (ref = NMAobj$reference.group, NMAobj)
+
+}
+
+CAfunnel <- function(NMAobj, rank) {
+
+  rank <- netrank(NMAobj)
+
+  treatment_names <- rank$Pscore.random
+  treatment_names <- data.frame(trt = names(treatment_names), score = unname(treatment_names))
+  f <- c(treatment_names$trt)
+
+  # Import funnel plot ranking data
+  p_rank<-rank
+
+  # Sort treatment names based on funnel plot ranking data
+  f<-f[order(match(f,p_rank))]
+
+  # Generate funnel plot (parameter col= is a really disgusting workaround to get the number of total comparisons)
+  funnel <- funnel.netmeta(NMAobj, order = f, legend = FALSE, pch = c(16), col = c(1:NROW(result.bin$Q.decomp$treat1)), linreg = TRUE, rank = FALSE, mm = FALSE)
 
 }
