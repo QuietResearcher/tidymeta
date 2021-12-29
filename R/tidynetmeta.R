@@ -1,4 +1,5 @@
 library (netmeta)
+library("tidyverse")
 
 # Hello, world!
 #
