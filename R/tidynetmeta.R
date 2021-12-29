@@ -77,7 +77,7 @@ NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL,
            col.inside = "black",
            lwd = 1,
            colgap.forest = "0.5cm",
-           smlab = paste ("Intervention vs", refname,"\n",modelname),
+           smlab = paste ("Intervention vs", refname,HiddenParameter,"\n",modelname),
            layout="JAMA")
   }
 
@@ -113,12 +113,14 @@ subgroupNMA.bin <- function(NMAobj, data, byvar, specvar = NULL, refname = "Untr
 
   for (v in tempvar) {
 
+    hp = paste("(",v," Subgroup)", sep="")
+
     tempdata <- x[v]
     tempdata <- tempdata[[v]]
     tempNMAobj <- simpleNMA.bin (data = tempdata, measure = NMAobj$sm, correction = NMAobj[["data"]][["allstudies"]][1], random = NMAobj$comb.random,
                                  ref = NMAobj[["reference.group"]], sm.val = NMAobj[["small.values"]])
 
-    NMAsummary (tempNMAobj, refname = refname, xlim = xlim, HiddenParameter = paste("(",v," Subgroup)", sep=""))
+    NMAsummary (tempNMAobj, refname = refname, xlim = xlim, HiddenParameter = hp)
 
   }
 }
