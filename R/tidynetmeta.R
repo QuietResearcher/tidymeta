@@ -48,6 +48,7 @@ NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL,
 
   if (!is.null(xlim)){
   forest(NMAobj,
+         overall.hetstat = FALSE,
          fontsize=10,
          leftcols = c("studlab", "Pscore", "effect", "ci"),
          leftlabs = c("Treatment Arms"),
@@ -65,6 +66,7 @@ NMAsummary <- function(NMAobj, refname = "Untreated (SOC/Placebo)", xlim = NULL,
          layout="JAMA")
   } else {
     forest(NMAobj,
+           overall.hetstat = FALSE,
            fontsize=10,
            leftcols = c("studlab", "Pscore", "effect", "ci"),
            leftlabs = c("Treatment Arms"),
@@ -101,7 +103,7 @@ CAfunnel <- function(NMAobj, rank) {
   f<-f[order(match(f,p_rank))]
 
   # Generate funnel plot (parameter col= is a really disgusting workaround to get the number of total comparisons)
-  funnel <- funnel.netmeta(NMAobj, order = f, legend = FALSE, pch = c(16), col = c(1:NROW(result.bin$Q.decomp$treat1)), linreg = TRUE, rank = FALSE, mm = FALSE)
+  funnel <- funnel.netmeta(NMAobj, order = f, legend = FALSE, pch = c(16), col = c(1:NROW(NMAobj$Q.decomp$treat1)), linreg = TRUE, rank = FALSE, mm = FALSE)
 
 }
 
